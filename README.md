@@ -2,7 +2,7 @@
 
 Simple hiring and interview platform built with **Python**, **HTML**, **CSS**, and **Vanilla JavaScript**.
 
-No `node_modules` or npm dependencies required — all backend logic runs through Python and serves the static frontend directly.
+
 
 ---
 
@@ -27,31 +27,16 @@ No `node_modules` or npm dependencies required — all backend logic runs throug
 
 ---
 
-## How to Run
 
-### Option 1: Double click `start.bat`
-Just run `start.bat` on Windows.
 
-### Option 2: Run via Terminal
-```bash
-python server.py
-```
 
-Then open your browser at:
-```
-http://localhost:5000
-```
+Default Admin Credentials
+Email: `admin@hirex.com`
+Password: `admin123`
 
 ---
 
-## Default Admin Credentials
-
-- **Email**: `admin@hirex.com`
-- **Password**: `admin123`
-
----
-
-## Project Structure
+Project Structure
 
 ```
 hirex/
