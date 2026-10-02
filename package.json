@@ -1,0 +1,10 @@
+{
+  "name": "hirex",
+  "version": "1.0.0",
+  "description": "Simple AI Interview Platform (HTML, CSS, JS + Python Backend)",
+  "main": "server.py",
+  "scripts": {
+    "start": "python server.py",
+    "dev": "python server.py"
+  }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Interview — HIREX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="brand">HIREX</a>
+  <div id="session-info" style="font-weight:600;font-size:.9rem;color:var(--muted)">
+    Interview Session
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="card flex-between" style="margin-bottom:20px">
+    <div>
+      <h1 id="cand-display-name" style="font-size:1.4rem;font-weight:700">Interview</h1>
+      <p id="cand-display-pos" style="color:var(--muted);font-size:.9rem">Loading...</p>
+    </div>
+    <span class="badge badge-orange" id="interview-badge">In Progress</span>
+  </div>
+
+  <!-- active interview -->
+  <div id="interview-active-view">
+
+    <div class="card" style="margin-bottom:16px">
+      <div id="chat-box" class="chat-box"></div>
+      <div id="ai-loading" style="display:none;align-items:center;gap:8px;color:var(--primary);font-size:.9rem;padding:8px 0">
+        <span>Evaluating your answer...</span>
+      </div>
+    </div>
+
+    <div class="card" id="answer-container">
+      <form onsubmit="handleAnswerSubmit(event)">
+        <div class="form-group">
+          <label for="answer-input" id="answer-label">Your answer:</label>
+          <textarea id="answer-input" rows="4" required placeholder="Type your answer or use the mic button below..."></textarea>
+        </div>
+        <div class="flex-between">
+          <button type="button" id="voice-btn" class="btn btn-secondary btn-sm" onclick="toggleVoice()">
+            Speak Answer
+          </button>
+          <button type="submit" id="submit-answer-btn" class="btn btn-primary">
+            Submit Answer
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- completed view -->
+  <div id="interview-report-view" style="display:none">
+
+    <div class="card card-yellow text-center" style="padding:32px 20px;margin-bottom:24px;text-align:center">
+      <div style="font-size:3rem;margin-bottom:8px">done!</div>
+      <h2 style="font-size:1.8rem;font-weight:700;margin-bottom:8px">Interview Complete</h2>
+      <p style="color:var(--muted);margin-bottom:16px">Here's your AI scorecard:</p>
+
+      <div style="max-width:300px;margin:0 auto 20px">
+        <div class="card stat-box">
+          <div class="stat-number" id="final-score">0/10</div>
+          <div style="font-size:.8rem;color:var(--muted);text-transform:uppercase">Overall Score</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;justify-content:center">
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+        <button onclick="window.print()" class="btn btn-primary">Print Report</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">Interview Transcript</h3>
+      <div id="transcript-list" style="display:flex;flex-direction:column;gap:14px"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', initInterviewPage)
+</script>
+</body>
+</html>

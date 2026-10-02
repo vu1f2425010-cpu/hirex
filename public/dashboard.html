@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — HIREX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="brand">HIREX</a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span id="user-greeting" style="font-size:.85rem;font-weight:600">Admin / Recruiter</span>
+    <button onclick="logoutRecruiter()" class="btn btn-secondary btn-sm">Logout</button>
+  </div>
+</nav>
+
+<div class="page" style="max-width:1050px">
+
+  <div class="flex-between" style="margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div>
+      <h1 style="font-size:1.6rem;font-weight:700">Candidate Dashboard</h1>
+      <p style="color:var(--muted);font-size:.9rem">Review interviews and manage hiring decisions</p>
+    </div>
+    <a href="/" class="btn btn-primary btn-sm">+ New Candidate</a>
+  </div>
+
+  <!-- stats row -->
+  <div class="grid-stats" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="card stat-box card-yellow">
+      <div class="stat-number" id="total-candidates">0</div>
+      <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase">Total Candidates</div>
+    </div>
+    <div class="card stat-box">
+      <div class="stat-number" id="total-assessments">0</div>
+      <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase">Assessments</div>
+    </div>
+    <div class="card stat-box">
+      <div class="stat-number" id="completed-interviews">0</div>
+      <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase">Completed</div>
+    </div>
+    <div class="card stat-box" style="border-color:#6ee7b7;background:#f0fdf4">
+      <div class="stat-number" id="total-hired" style="color:#047857">0</div>
+      <div style="font-size:.75rem;color:#047857;text-transform:uppercase;font-weight:700">Hired</div>
+    </div>
+  </div>
+
+  <!-- candidate table -->
+  <div class="card">
+    <div class="flex-between" style="margin-bottom:14px;flex-wrap:wrap;gap:10px">
+      <h2 style="font-size:1.1rem;font-weight:700">Candidate Pipeline</h2>
+      <div class="filter-pills" style="margin-bottom:0">
+        <button class="filter-pill active" onclick="setCandidateFilter('all')">All</button>
+        <button class="filter-pill" onclick="setCandidateFilter('hired')">Hired</button>
+        <button class="filter-pill" onclick="setCandidateFilter('shortlisted')">Shortlisted</button>
+        <button class="filter-pill" onclick="setCandidateFilter('pending')">Pending</button>
+        <button class="filter-pill" onclick="setCandidateFilter('rejected')">Rejected</button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Position</th>
+          <th>Score</th>
+          <th>Interview</th>
+          <th>Hire Status</th>
+          <th style="min-width:160px">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="candidates-tbody">
+        <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--muted)">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- hire/decision modal -->
+<div id="hire-modal" class="modal-overlay" style="display:none">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Hiring Decision</h3>
+      <button class="modal-close" onclick="closeHireModal()">&times;</button>
+    </div>
+
+    <div id="modal-cand-info" style="margin-bottom:14px;padding:12px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+      <div style="font-weight:700;font-size:1.05rem" id="modal-cand-name">-</div>
+      <div style="font-size:.85rem;color:var(--muted)" id="modal-cand-pos">-</div>
+      <div style="font-size:.85rem;margin-top:4px">Score: <strong id="modal-cand-score">-</strong></div>
+    </div>
+
+    <form onsubmit="handleHireModalSubmit(event)">
+      <input type="hidden" id="modal-cand-id">
+      <div class="form-group">
+        <label for="modal-status-select">Decision</label>
+        <select id="modal-status-select">
+          <option value="hired">Hired — Send Offer</option>
+          <option value="shortlisted">Shortlisted — Next Round</option>
+          <option value="pending">Pending Review</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="modal-hire-notes">Notes</label>
+        <textarea id="modal-hire-notes" rows="3" placeholder="e.g. Offered $90k, start Nov 1..."></textarea>
+      </div>
+      <div class="flex-between" style="margin-top:16px">
+        <button type="button" class="btn btn-secondary" onclick="closeHireModal()">Cancel</button>
+        <button type="submit" class="btn-hire" style="padding:10px 20px">Save Decision</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', initDashboardPage)
+</script>
+</body>
+</html>

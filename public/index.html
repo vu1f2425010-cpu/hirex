@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIREX — AI Interview Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="brand">HIREX</a>
+  <div>
+    <a href="/dashboard.html" class="btn btn-secondary btn-sm">Recruiter Portal</a>
+  </div>
+</nav>
+
+<div class="center-page">
+  <div style="max-width:500px;width:100%">
+
+    <div style="text-align:center;margin-bottom:24px">
+      <h1 style="font-size:2.2rem;font-weight:700;color:var(--primary)">HIREX</h1>
+      <p style="color:var(--muted)">AI-powered technical interviews</p>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button id="tab-candidate-btn" class="tab-btn active" onclick="switchTab('candidate')">
+          Candidate
+        </button>
+        <button id="tab-recruiter-btn" class="tab-btn" onclick="switchTab('recruiter')">
+          Recruiter / Admin
+        </button>
+      </div>
+
+      <div id="alert-box" class="alert alert-error" style="display:none"></div>
+
+      <!-- candidate form -->
+      <form id="candidate-form" onsubmit="handleCandidateSubmit(event)">
+        <div class="form-group">
+          <label for="cand-name">Full Name *</label>
+          <input type="text" id="cand-name" placeholder="e.g. Alex Morgan" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="cand-email">Email</label>
+          <input type="email" id="cand-email" placeholder="alex@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="cand-dob">Date of Birth</label>
+          <input type="date" id="cand-dob">
+        </div>
+        <div class="form-group">
+          <label for="cand-pos">Position Applying For *</label>
+          <input type="text" id="cand-pos" placeholder="e.g. Frontend Developer" required>
+        </div>
+        <div class="form-group">
+          <label for="cand-resume">Resume / Background *</label>
+          <textarea id="cand-resume" rows="4" required placeholder="Paste your resume or describe your skills and experience here. The AI will use this to create personalized questions."></textarea>
+          <span style="font-size:.75rem;color:var(--muted);margin-top:4px;display:block">
+            Tip: More detail = better questions
+          </span>
+        </div>
+        <button type="submit" id="cand-submit-btn" class="btn btn-primary btn-block" style="padding:12px;margin-top:8px">
+          Start Interview
+        </button>
+      </form>
+
+      <!-- recruiter login form -->
+      <form id="recruiter-form" style="display:none" onsubmit="handleRecruiterLogin(event)">
+        <div class="form-group">
+          <label for="rec-email">Work Email</label>
+          <input type="email" id="rec-email" required placeholder="recruiter@company.com">
+        </div>
+        <div class="form-group">
+          <label for="rec-password">Password</label>
+          <input type="password" id="rec-password" required placeholder="••••••••">
+        </div>
+        <button type="submit" id="rec-submit-btn" class="btn btn-primary btn-block" style="padding:12px;margin-top:8px">
+          Sign In
+        </button>
+
+        <!-- demo creds -->
+        <div style="margin-top:20px;padding:14px;background:var(--card-yellow);border-radius:var(--radius);border:1px solid #fde68a">
+          <p style="font-size:.75rem;color:var(--muted);font-weight:600;margin-bottom:8px">Demo accounts:</p>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn btn-secondary btn-sm" style="flex:1" onclick="fillDemo('recruiter@hirex.com','recruiter123')">
+              Recruiter
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" style="flex:1" onclick="fillDemo('admin@hirex.com','admin123')">
+              Admin
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
